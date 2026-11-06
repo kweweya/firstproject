@@ -5,11 +5,11 @@ from starlette.routing import Route
 
 
 async def homepage (request):
-    return HTMLResponse ('<h1> What is your password </h1> <form method="post" action="/result"> <input type="password" name="name" /> <input type="submit" value="Submit" /></form>')
+    return HTMLResponse ('<h1> Admin Login </h1> <form method="post" action="/result"> <input type="text" name="user"> <input type="password" name="pass" /> <input type="submit" value="Submit" /></form>')
 
 async def result (request):
     async with request.form() as form:
-        if form and form["name"] and "admin" == form["name"]:
+        if form and form["user"] and form["pass"] and "admin" == form["user"] and "12345678" == form["pass"]:
             return PlainTextResponse ("Success")
         else:
             return PlainTextResponse ("Failure")
